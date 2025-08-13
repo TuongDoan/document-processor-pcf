@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="TuongD.PCF" constructor="DocumentProcessor" version="0.0.1" display-name-key="DocumentProcessor" description-key="DocumentProcessor description" control-type="virtual" >
+
+    <external-service-usage enabled="false"></external-service-usage>
+    
+    <!-- General -->
+    <property name="Text" display-name-key="Text" description-key="Text to display in the button." of-type="SingleLine.Text" usage="bound" required="true" default-value="File upload"/>
+    <property name="ButtonIcon" display-name-key="ButtonIcon" description-key="Icon to display in the button." of-type="Enum" usage="input" required="true" default-value="Attach">
+      <value name="Attach" display-name-key="Attach">Attach</value>
+      <value name="Add document" display-name-key="DocumentAdd">DocumentAdd</value>
+      <value name="ArrowUpload" display-name-key="ArrowUpload">ArrowUpload</value>
+    </property>
+
+
+    <property name="IconStyle" display-name-key="Icon style" description-key="Whether the icon style should be outline or filled." of-type="Enum" usage="input" required="true" default-value="0">
+      <value name="Outline" display-name-key="Outline">0</value>
+      <value name="Filled" display-name-key="Filled">1</value>
+    </property>    
+        <!-- NEW: Range mode controls -->
+    <property name="RangeMode" display-name-key="Range mode" description-key="RangeMode" of-type="TwoOptions" usage="input" required="false" default-value="false"/>
+    <property name="AutoHeader" display-name-key="Auto header" description-key="AutoHeader" of-type="TwoOptions" usage="input" required="false" default-value="false"/>
+    <property name="targetRange" display-name-key="Target range" description-key="targetRange" of-type="SingleLine.Text" usage="input" required="false" />
+
+
+    <!-- Extra properties -->
+    <property name="AllowMultipleFiles" display-name-key="Allow multiple files" description-key="Allow just one file or multiple files." of-type="TwoOptions" usage="input" required="false" default-value="false" />
+    <property name="AllowedFileTypes" display-name-key="Allowed file types" description-key="Provide the file extension names separated by a semicolon." of-type="SingleLine.Text" usage="bound" required="false" default-value="*"/>
+    <property name="AllowDropFiles" display-name-key="Allow drag and drop" description-key="Allow drag and drop." of-type="TwoOptions" usage="input" required="false" default-value="true" />
+    <property name="AllowDropFilesText" display-name-key="Allow drag and drop text." description-key="Allow drag and drop text." of-type="SingleLine.Text" usage="bound" required="false" default-value="Drop files here..."/>
+    <property name="ShowActionSpinner" display-name-key="Show action spinner" description-key="Display a spinner animation on the button during the upload process." of-type="TwoOptions" usage="input" required="false" default-value="true" />
+    <property name="ShowSecondaryContent" display-name-key="Show secondary content" description-key="Displays an additional line of text below the button label." of-type="TwoOptions" usage="bound" required="false" default-value="false" />
+    <property name="SecondaryContent" display-name-key="Secondary content text" description-key="Additional line of text below the button label." of-type="SingleLine.Text" usage="bound" required="false" />
+    
+  
+    <!-- Size and pozition -->
+    <property name="Width" display-name-key="Width" description-key="Button width of the button." of-type="Whole.None" usage="input" required="true" default-value="128" />
+    <property name="Height" display-name-key="Height" description-key="Button height of the button." of-type="Whole.None" usage="input" required="true" default-value="32" />
+    
+    <!-- Style and theme -->
+    <property name="Appearance" display-name-key="Appearance" description-key="A button can have its content and borders styled for greater emphasis or to be subtle." of-type="Enum" usage="input" required="true" default-value="0">
+      <value name="Primary" display-name-key="Primary">0</value>
+      <value name="Secondary" display-name-key="Secondary">1</value>
+      <value name="Outline" display-name-key="Outline">2</value>
+      <value name="Subtle" display-name-key="Subtle">3</value>
+      <value name="Transparent" display-name-key="Transparent">4</value>
+    </property>
+    <property name="Align" display-name-key="Align" description-key="Align" of-type="Enum" usage="input" required="true" default-value="1">
+      <value name="Left" display-name-key="Left">0</value>
+      <value name="Center" display-name-key="Center">1</value>
+      <value name="Right" display-name-key="Right">2</value>
+      <value name="Justify" display-name-key="Justify">3</value>
+    </property>
+    <property name="FontWeight" display-name-key="Font weight" description-key="Font weight" of-type="Enum" usage="input" required="true" default-value="2">
+      <value name="Bold" display-name-key="Bold">0</value>
+      <value name="Lighter" display-name-key="Lighter">1</value>
+      <value name="Normal" display-name-key="Normal">2</value>
+      <value name="Semibold" display-name-key="Semibold">3</value>
+    </property>
+    <property name="IconPosition" display-name-key="Icon position" description-key="A button can format its icon to appear before or after its content." of-type="Enum" usage="input" required="true" default-value="0">
+      <value name="Before" display-name-key="Before">0</value>
+      <value name="After" display-name-key="After">1</value>
+    </property>
+    <property name="Shape" display-name-key="Shape" description-key="A button can be rounded, circular, or square." of-type="Enum" usage="input" required="true" default-value="0">
+      <value name="Rounded" display-name-key="Rounded">0</value>
+      <value name="Circular" display-name-key="Circular">1</value>
+      <value name="Square" display-name-key="Square">2</value>
+    </property>
+    <property name="ButtonSize" display-name-key="Button size" description-key="A button supports different sizes." of-type="Enum" usage="input" required="true" default-value="0">
+      <value name="Small" display-name-key="Small">0</value>
+      <value name="Medium" display-name-key="Medium">1</value>
+      <value name="Large" display-name-key="Large">2</value>
+    </property>
+    <property name="Visible" display-name-key="Button visible" description-key="Show or hide the button." of-type="TwoOptions" usage="input" required="true" default-value="true" />
+
+
+
+
+    
+    <!-- Output -->
+    <property name="FilesAsJSON" display-name-key="Selected file(s)" description-key="Selected file(s)" of-type="SingleLine.Text" usage="output" required="false" hidden="false" default-value=""/>
+    <property name="ExcelOutput" display-name-key="Parsed table(s)" description-key="Parsed table(s)" of-type="SingleLine.Text" usage="output" required="false" hidden="false" default-value=""/>
+
+
+    <resources>
+      <code path="index.ts" order="1"/>
+      <platform-library name="React" version="16.14.0" />
+      <platform-library name="Fluent" version="9.46.2" />
+
+    </resources>
+
+  </control>
+</manifest>
