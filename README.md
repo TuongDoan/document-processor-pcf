@@ -49,6 +49,8 @@ Dynamic mode parses all tables across all sheets
 - 🎨 **Theme inheritance** from Power Apps  
 - 🌀 **Progress spinner** and optional secondary text for better feedback
 
+<img width="698" height="168" alt="button" src="https://github.com/user-attachments/assets/e5f9081d-9754-4905-bdbb-d563421f4f6c" />
+
 
 ---
 
