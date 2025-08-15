@@ -52,6 +52,13 @@ Dynamic mode parses all tables across all sheets
 <img width="698" height="168" alt="button" src="https://github.com/user-attachments/assets/e5f9081d-9754-4905-bdbb-d563421f4f6c" />
 
 
+## 👨🏻‍💻 Download here: 
+  <a href="https://github.com/TuongDoan/document-processor-pcf/releases/download/v1.0.0/DocumentProcessor_Managed_1.0.0.zip">
+    DocumentProcessor_Managed_1.0.0.zip
+  </a>
+
+
+
 ---
 
 
