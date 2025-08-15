@@ -6,9 +6,11 @@ A Power Apps Component Framework (PCF) control for **fast, local Excel parsing**
 
 ## ✨ Why this exists
 
-A common pattern is: upload Excel to SharePoint → use Power Automate to iterate through a formatted table. It works, but it’s **slow**, **inefficient**, and **large tables often stall**.
+A common Excel parsing workflow: Upload the file to SharePoint → wait for Power Automate to trigger → iterate through a formatted table.
 
-**Document Processor** extracts tables locally—**in a blink** - and returns clean JSON you can use immediately in your app or send to downstream Power Automate Flows/ Agents/ Services... ⚙️
+That approach works, but **slow**, **inefficient**, and **large tables often stall**. It doesn’t have to be like that. 
+
+This **Document Processor PCF** extracts tables locally — in a blink (nah, just kidding 😄) and returns clean JSON you can immediately use in your app or send to downstream Power Automate flows, agents, or other services. ⚙️
 
 
 ---
@@ -26,11 +28,15 @@ A common pattern is: upload Excel to SharePoint → use Power Automate to iterat
   - Provide a starting header range (e.g., `Sheet1!B2:Z2`). The parser reads columns **B → Z** starting at **row 2**, and continues **until the first blank row**.
   - Ideal for standardized templates (e.g., purchase orders with variable row counts).
 
+---
+
 **🔎 Dynamic Search Mode**
   - Scans **all worksheets** (across multiple files) to detect **every table**.
   - A “table” = any **continuous** block of cells with **no blank rows or columns** interrupting it.
     > Originally a tool of my MCP server, this lets you extract all tables and hand them to your Agent for deeper analysis and richer context. 🤝
 
+<img width="1101" height="454" alt="dynamic" src="https://github.com/user-attachments/assets/1b00bdbe-ac4a-4a60-9f71-6703dc8eaffb" />
+Dynamic mode parses all tables across all sheets
 
 ---
 
