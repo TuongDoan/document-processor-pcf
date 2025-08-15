@@ -10,7 +10,7 @@ A common Excel parsing workflow: Upload the file to SharePoint → wait for Powe
 
 That approach works, but **slow**, **inefficient**, and **large tables often stall**. It doesn’t have to be like that. 
 
-This **Document Processor PCF** extracts tables locally — in a blink (nah, just kidding 😄) and returns clean JSON you can immediately use in your app or send to downstream Power Automate flows, agents, or other services. ⚙️
+This **Document Processor PCF** extracts tables locally, lightning fast and returns clean JSON you can immediately use in your app or send to downstream Power Automate flows, AI Builder, agents, or other services. ⚙️
 
 
 ---
@@ -33,7 +33,7 @@ This **Document Processor PCF** extracts tables locally — in a blink (nah, jus
 **🔎 Dynamic Search Mode**
   - Scans **all worksheets** (across multiple files) to detect **every table**.
   - A “table” = any **continuous** block of cells with **no blank rows or columns** interrupting it.
-    > Originally a tool of my MCP server, this lets you extract all tables and hand them to your Agent for deeper analysis and richer context. 🤝
+    > Originally a tool of my MCP server, this lets you extract all tables and hand them to AI Builder, or your remote agent for deeper analysis and richer context. 🤝
 
 <img width="1101" height="454" alt="dynamic" src="https://github.com/user-attachments/assets/1b00bdbe-ac4a-4a60-9f71-6703dc8eaffb" />
 Dynamic mode parses all tables across all sheets
