@@ -1,3 +1,5 @@
+
+
 import * as XLSX from 'xlsx';
 
 export interface ExcelTable {
@@ -144,5 +146,62 @@ export function parseExcelFixed(
     };
 
     // Return as object
+    return { fileName, table: result };
+}
+
+// Fixed column search: get all rows below a header row range until a blank row is hit in that range
+export function parseExcelFixedColumnSearch(
+    data: ArrayBuffer,
+    range: string,
+    fileName: string,
+    autoHeader: boolean
+): { fileName: string; table?: ExcelTable; error?: string; message?: string } {
+    const workbook = XLSX.read(data, { type: 'array' });
+    const [sheetName, rangeStr] = range.split('!');
+    const worksheet = workbook.Sheets[sheetName];
+    if (!worksheet) {
+        return { error: `Sheet "${sheetName}" not found.`, fileName };
+    }
+    // Parse the range, e.g. B2:Z2
+    const headerRange = XLSX.utils.decode_range(rangeStr);
+    let headers: string[] = [];
+    const colCount = headerRange.e.c - headerRange.s.c + 1;
+    if (autoHeader) {
+        headers = Array.from({ length: colCount }, (_, i) => `Column_${i + 1}`);
+    } else {
+        // Get header values from the specified row
+        for (let c = headerRange.s.c; c <= headerRange.e.c; ++c) {
+            const cellAddress = XLSX.utils.encode_cell({ r: headerRange.s.r, c });
+            const cell = worksheet[cellAddress] as XLSX.CellObject | undefined;
+            headers.push(cell?.v != null ? String(cell.v) : `Column_${c - headerRange.s.c + 1}`);
+        }
+    }
+    // Now, collect rows below header until a blank row is hit in the range
+    const rows: Record<string, unknown>[] = [];
+    let row = autoHeader ? headerRange.s.r : headerRange.s.r + 1;
+    while (true) {
+        let isBlankRow = true;
+        const rowObj: Record<string, unknown> = {};
+        for (let c = headerRange.s.c; c <= headerRange.e.c; ++c) {
+            const cellAddress = XLSX.utils.encode_cell({ r: row, c });
+            const cell = worksheet[cellAddress] as XLSX.CellObject | undefined;
+            const header = headers[c - headerRange.s.c];
+            rowObj[header] = cell?.v ?? null;
+            if (cell?.v !== undefined && cell?.v !== null && String(cell.v).trim() !== "") {
+                isBlankRow = false;
+            }
+        }
+        if (isBlankRow) break;
+        rows.push(rowObj);
+        row++;
+    }
+    if (rows.length === 0) {
+        return { message: "No data found in the specified range.", fileName };
+    }
+    const result: ExcelTable = {
+        fileName: fileName,
+        sheetName: sheetName,
+        data: rows
+    };
     return { fileName, table: result };
 }

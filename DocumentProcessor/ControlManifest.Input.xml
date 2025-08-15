@@ -18,7 +18,12 @@
       <value name="Filled" display-name-key="Filled">1</value>
     </property>    
         <!-- NEW: Range mode controls -->
-    <property name="RangeMode" display-name-key="Range mode" description-key="RangeMode" of-type="TwoOptions" usage="input" required="false" default-value="false"/>
+    <property name="ParsingMode" display-name-key="Parsing mode" description-key="Type of parsing mode" of-type="Enum" usage="input" required="true" default-value="0">
+      <value name="Dynamic" display-name-key="Dynamic">0</value>
+      <value name="Fixed range" display-name-key="FixedRange">1</value>
+      <value name="Fixed column" display-name-key="FixedColumn">2</value>
+    </property>    
+
     <property name="AutoHeader" display-name-key="Auto header" description-key="AutoHeader" of-type="TwoOptions" usage="input" required="false" default-value="false"/>
     <property name="targetRange" display-name-key="Target range" description-key="targetRange" of-type="SingleLine.Text" usage="input" required="false" />
 

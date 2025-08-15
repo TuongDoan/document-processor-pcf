@@ -5,7 +5,7 @@ import {
   IFilesImportControlProps,
 } from "./FilesImportControl";
 import { Theme, webLightTheme } from "@fluentui/react-components";
-import { parseExcelDynamic, parseExcelFixed } from "./Excel";
+import { parseExcelDynamic, parseExcelFixed, parseExcelFixedColumnSearch } from "./Excel";
 
 export class DocumentProcessor
   implements ComponentFramework.ReactControl<IInputs, IOutputs>
@@ -15,7 +15,7 @@ export class DocumentProcessor
   private excelOutput: string | null = null;
   private excelOutputs: string[] | null = null;
 
-  private rangeMode: boolean;
+  private parsingMode: number;
   private targetRange: string;
   private autoHeader: boolean;
 
@@ -34,8 +34,7 @@ export class DocumentProcessor
       (context.fluentDesignLanguage?.tokenTheme as Theme | undefined) ??
       webLightTheme;
 
-    this.rangeMode =
-      (context.parameters.RangeMode?.raw as unknown as boolean) ?? false;
+    this.parsingMode = Number(context.parameters.ParsingMode?.raw ?? 0);
     this.autoHeader =
       (context.parameters.AutoHeader?.raw as unknown as boolean) ?? false;
     this.targetRange = context.parameters.targetRange?.raw ?? "";
@@ -83,13 +82,18 @@ export class DocumentProcessor
       if (Array.isArray(files) && files.length > 0) {
         const range = this.targetRange;
         const autoHeader = this.autoHeader;
+        const parsingMode = this.parsingMode;
 
         const results: unknown[] = files.map((file) => {
           if (file?.name && file?.binary && file.binary.byteLength > 0) {
-            if (this.rangeMode && range) {
-              return parseExcelFixed(file.binary, range, file.name, autoHeader);
-            } else {
-              return parseExcelDynamic(file.binary, file.name);
+            switch (parsingMode) {
+              case 1: // Fixed range
+                return parseExcelFixed(file.binary, range, file.name, autoHeader);
+              case 2: // Fixed column
+                return parseExcelFixedColumnSearch(file.binary, range, file.name, autoHeader);
+              case 0:
+              default:
+                return parseExcelDynamic(file.binary, file.name);
             }
           } else {
             return "";
