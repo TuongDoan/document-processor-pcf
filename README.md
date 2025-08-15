@@ -107,7 +107,7 @@ Dynamic mode parses all tables across all sheets
 
 ## 🖼️ Base64 output (non-Excel too)
 
-When you upload other file types, the control returns an **array of Base64 strings** (one per file) via `FilesAsJSON`.  
+When you upload other file types, the control returns an **array of Base64 strings** (one object per file) via `FilesAsJSON`.  
 Great for:
 - Sending images to **AI Vision** models. 👁️  
 - Uploading to **Blob storage** or APIs without extra conversions. ☁️
@@ -117,6 +117,8 @@ Great for:
 
 ## 🔐 Security & privacy
 
-Parsing happens **client-side** in the app session. Validate and sanitize sensitive outputs before forwarding to external services. Use **AllowedFileTypes** to restrict uploads in sensitive apps.
+- Parsing happens **client-side** in the app session. 
+- Although it was designed to dodge Formula Injection Attacks, you should validate and sanitize sensitive outputs before forwarding them to external services.
+- Use **AllowedFileTypes** to restrict uploads in sensitive apps.
 
 
