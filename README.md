@@ -22,10 +22,10 @@ This **Document Processor PCF** extracts tables locally, lightning fast and retu
 
 **📍 Fixed Range Mode**
   - Parse a specific, predefined cell range (e.g., `Sheet1!A1:B2`).
-  - Optional **AutoHeader**: promote the first row to headers when your data has none.
+  - Optional **AutoHeader**: Add header to data that doesnt have one
 
 **🧱 Fixed Column Mode**
-  - Provide a starting header range (e.g., `Sheet1!B2:Z2`). The parser reads columns **B → Z** starting at **row 2**, and continues **until the first blank row**.
+  - Provide a starting header range (e.g., `Sheet1!B2:Z2`). The parser reads columns **B → Z** starting at **row 2**, and continues **until hit the first blank row**.
   - Ideal for standardized templates (e.g., purchase orders with variable row counts).
 
 ---
