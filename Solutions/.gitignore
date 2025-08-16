@@ -6,3 +6,6 @@
 
 # MSBuild Binary and Structured Log
 *.binlog
+
+# User-specific settings
+**/usersettings.json

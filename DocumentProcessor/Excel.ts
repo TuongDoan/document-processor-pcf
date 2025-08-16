@@ -149,7 +149,7 @@ export function parseExcelFixed(
     return { fileName, table: result };
 }
 
-// Fixed column search: get all rows below a header row range until a blank row is hit in that range
+
 export function parseExcelFixedColumnSearch(
     data: ArrayBuffer,
     range: string,
@@ -162,21 +162,21 @@ export function parseExcelFixedColumnSearch(
     if (!worksheet) {
         return { error: `Sheet "${sheetName}" not found.`, fileName };
     }
-    // Parse the range, e.g. B2:Z2
+    
     const headerRange = XLSX.utils.decode_range(rangeStr);
     let headers: string[] = [];
     const colCount = headerRange.e.c - headerRange.s.c + 1;
     if (autoHeader) {
         headers = Array.from({ length: colCount }, (_, i) => `Column_${i + 1}`);
     } else {
-        // Get header values from the specified row
+        
         for (let c = headerRange.s.c; c <= headerRange.e.c; ++c) {
             const cellAddress = XLSX.utils.encode_cell({ r: headerRange.s.r, c });
             const cell = worksheet[cellAddress] as XLSX.CellObject | undefined;
             headers.push(cell?.v != null ? String(cell.v) : `Column_${c - headerRange.s.c + 1}`);
         }
     }
-    // Now, collect rows below header until a blank row is hit in the range
+    
     const rows: Record<string, unknown>[] = [];
     let row = autoHeader ? headerRange.s.r : headerRange.s.r + 1;
     while (true) {
